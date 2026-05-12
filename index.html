@@ -109,13 +109,35 @@
     transition: color 0.2s, border-color 0.2s;
   }
   .matrix-link:hover { color: var(--gold); border-color: var(--gold); }
+  #entry-overlay {
+    position: fixed; inset: 0; z-index: 99999;
+    background: rgba(6,8,15,0.97);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    cursor: pointer;
+  }
+  #entry-overlay .entry-title { font-size:1.1rem; letter-spacing:0.3em; text-transform:uppercase; color:#e0e8f0; margin-bottom:16px; }
+  #entry-overlay .entry-sub { font-size:0.75rem; letter-spacing:0.2em; text-transform:uppercase; color:#9aaabb; margin-bottom:40px; }
+  #entry-overlay .entry-btn { border:1px solid #1e2a45; padding:14px 40px; border-radius:6px; color:#ffffff; font-size:0.9rem; letter-spacing:0.15em; text-transform:uppercase; }
 </style>
 </head>
 <body>
+  <audio id="portada-audio" loop preload="auto">
+    <source src="https://github.com/JVillacorta42/argo-web/releases/download/v1.0-media/musica.portada.mp3" type="audio/mpeg">
+  </audio>
   <video id="bg-video" autoplay loop muted playsinline preload="auto">
     <source src="portada_2.mp4" type="video/mp4">
   </video>
   <div class="overlay"></div>
+  <div id="entry-overlay" onclick="(function(){
+    document.getElementById('entry-overlay').remove();
+    var a = document.getElementById('portada-audio');
+    if(a){ a.volume=0.5; a.play().catch(function(){}); }
+  })()">
+    <div class="entry-title">Aeon Trespass Odyssey</div>
+    <div class="entry-sub">Libro-Juego Digital</div>
+    <div class="entry-btn">Entrar</div>
+  </div>
   <div class="content">
   <h1>Aeon Trespass Odyssey</h1>
   <p class="subtitle">Libro-Juego Digital</p>

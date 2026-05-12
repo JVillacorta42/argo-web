@@ -1537,9 +1537,9 @@ function _startTrack(src, vol, fromStart) {
   a.loop = true;
   a.volume = 0;
   a._src = src;
+  a.play().catch(function(){});
   function _play() {
     a.currentTime = fromStart ? 0 : Math.random() * (a.duration || 0);
-    a.play();
     var j = 0, steps = 30, stepTime = 50;
     var fadeIn = setInterval(function() {
       j++;
