@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aeon Trespass Odyssey</title>
+<style>
+  :root {
+    --bg: #06080f;
+    --bg2: #0d1220;
+    --border: #1e2a45;
+    --text: #e0e8f0;
+    --text-muted: #9aaabb;
+    --gold: #ffffff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', Georgia, serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+  h1 {
+    font-size: 1.4rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  .subtitle {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    letter-spacing: 0.15em;
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  .cycles {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    max-width: 380px;
+  }
+  .cycle-btn {
+    display: block;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 18px 24px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+    cursor: pointer;
+  }
+  .cycle-btn:hover {
+    border-color: var(--gold);
+    background: #111827;
+  }
+  .cycle-btn .num {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .cycle-btn .name {
+    font-size: 1rem;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+  }
+  .matrix-link {
+    margin-top: 32px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    padding: 8px 20px;
+    border-radius: 4px;
+    letter-spacing: 0.1em;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .matrix-link:hover { color: var(--gold); border-color: var(--gold); }
+</style>
+</head>
+<body>
+  <h1>Aeon Trespass Odyssey</h1>
+  <p class="subtitle">Libro-Juego Digital</p>
+
+  <div class="cycles">
+    <a class="cycle-btn" href="ciclo3/libro-juego-argo_Espacios.html">
+      <span class="num">Ciclo III</span>
+      <span class="name">Los Despiadados del Sol</span>
+    </a>
+    <a class="cycle-btn" href="argo.html">
+      <span class="num">Ciclo IV</span>
+      <span class="name">Jardines del Crecimiento Infinito</span>
+    </a>
+    <a class="cycle-btn" href="Ciclo_5/c5_app.html">
+      <span class="num">Ciclo V</span>
+      <span class="name">El Profeta</span>
+    </a>
+  </div>
+
+  <a class="matrix-link" href="matrix.html" target="_blank">⊕ Choice Matrix</a>
+</body>
+</html>

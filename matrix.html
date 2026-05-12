@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Choice Matrix — ATO</title>
+<style>
+  :root {
+    --bg: #06080f;
+    --bg2: #0d1220;
+    --bg3: #141a2e;
+    --border: #1e2a45;
+    --gold: #ffffff;
+    --text: #e0e8f0;
+    --text-muted: #9aaabb;
+    --cross: #e05050;
+    --cross-bg: rgba(200,50,50,0.18);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', Arial, sans-serif;
+    min-height: 100vh;
+    padding: 14px;
+    user-select: none;
+  }
+  h1 {
+    text-align: center;
+    font-size: 1rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+  }
+  .controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .controls button {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 3px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+  }
+  .controls button:hover { border-color: var(--gold); color: var(--gold); }
+  #cycle-label {
+    text-align: center;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    letter-spacing: 0.08em;
+  }
+  .col-headers {
+    display: grid;
+    grid-template-columns: 28px repeat(12, 1fr);
+    gap: 3px;
+    max-width: 580px;
+    margin: 0 auto 3px;
+  }
+  .col-header {
+    text-align: center;
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    padding: 2px 0;
+  }
+  .grid-wrap {
+    max-width: 580px;
+    margin: 0 auto;
+  }
+  .grid-row {
+    display: grid;
+    grid-template-columns: 28px repeat(12, 1fr);
+    gap: 3px;
+    margin-bottom: 3px;
+  }
+  .row-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    font-weight: bold;
+  }
+  .cell {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    position: relative;
+    transition: border-color 0.1s, background 0.1s;
+    min-height: 22px;
+  }
+  .cell:hover { border-color: #4a6a9a; color: var(--text); }
+  .cell.crossed {
+    background: var(--cross-bg);
+    border-color: var(--cross);
+    color: var(--cross);
+  }
+  .cell.crossed::after {
+    content: '✕';
+    position: absolute;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: var(--cross);
+    opacity: 0.85;
+  }
+  .cell.crossed span { opacity: 0.25; }
+  .counter {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+  .counter b { color: var(--text); }
+</style>
+</head>
+<body>
+<h1>⊕ Choice Matrix ⊕</h1>
+<div id="cycle-label">Ciclo: —</div>
+<div class="controls">
+  <button onclick="resetAll()">Reiniciar todo</button>
+  <button onclick="window.close()">Cerrar</button>
+</div>
+
+<div class="col-headers" id="col-headers"></div>
+<div class="grid-wrap" id="grid"></div>
+<div class="counter" id="counter"></div>
+
+<script>
+  var ROWS = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','Aa','Bb','Cc','Dd','Ee','Ff'];
+  var COLS = 12;
+  var TOTAL = ROWS.length * COLS;
+  var state = {};
+  var _serverOk = true;
+
+  document.getElementById('cycle-label').style.display = 'none';
+
+  // Column headers
+  var hdrRow = document.getElementById('col-headers');
+  hdrRow.innerHTML = '<div class="col-header"></div>';
+  for (var c = 1; c <= COLS; c++) {
+    hdrRow.innerHTML += '<div class="col-header">' + c + '</div>';
+  }
+
+  function loadState(cb) {
+    fetch('http://127.0.0.1:7823/matrix')
+      .then(function(r){ return r.json(); })
+      .then(function(d){ state = d || {}; cb(); })
+      .catch(function(){
+        _serverOk = false;
+        try { state = JSON.parse(localStorage.getItem('ato-matrix') || '{}'); } catch(e) {}
+        cb();
+      });
+  }
+
+  function buildGrid() {
+    var grid = document.getElementById('grid');
+    grid.innerHTML = '';
+    ROWS.forEach(function(rowLabel) {
+      var rowDiv = document.createElement('div');
+      rowDiv.className = 'grid-row';
+      var lbl = document.createElement('div');
+      lbl.className = 'row-label';
+      lbl.textContent = rowLabel;
+      rowDiv.appendChild(lbl);
+      for (var c = 1; c <= COLS; c++) {
+        var key = rowLabel + c;
+        var cell = document.createElement('div');
+        cell.className = 'cell' + (state[key] ? ' crossed' : '');
+        cell.dataset.key = key;
+        var span = document.createElement('span');
+        span.textContent = key;
+        cell.appendChild(span);
+        cell.addEventListener('click', toggle);
+        rowDiv.appendChild(cell);
+      }
+      grid.appendChild(rowDiv);
+    });
+    updateCounter();
+  }
+
+  function toggle() {
+    var key = this.dataset.key;
+    if (state[key]) {
+      delete state[key];
+      this.classList.remove('crossed');
+    } else {
+      state[key] = 1;
+      this.classList.add('crossed');
+    }
+    save();
+    updateCounter();
+  }
+
+  function save() {
+    var json = JSON.stringify(state);
+    if (_serverOk) {
+      fetch('http://127.0.0.1:7823/matrix', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: json
+      }).catch(function(){ localStorage.setItem('ato-matrix', json); });
+    } else {
+      try { localStorage.setItem('ato-matrix', json); } catch(e) {}
+    }
+  }
+
+  function resetAll() {
+    if (!confirm('¿Reiniciar toda la matriz?')) return;
+    state = {};
+    save();
+    buildGrid();
+  }
+
+  function updateCounter() {
+    var used = Object.keys(state).length;
+    document.getElementById('counter').innerHTML =
+      'Tachadas: <b>' + used + '</b> / ' + TOTAL + ' &nbsp;·&nbsp; Disponibles: <b>' + (TOTAL - used) + '</b>';
+  }
+
+  loadState(buildGrid);
+</script>
+</body>
+</html>
