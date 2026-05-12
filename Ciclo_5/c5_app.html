@@ -2112,34 +2112,7 @@ function startApp() {
 
 </script>
 
-<div id="web-entry-overlay" style="
-  position:fixed;inset:0;z-index:99999;
-  background:rgba(6,8,15,0.97);
-  display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-  font-family:'Segoe UI',Georgia,serif;
-  cursor:pointer;
-" onclick="(function(){
-  document.getElementById('web-entry-overlay').remove();
-  if(typeof startApp === 'function') startApp(); else { if(window._bgAudio){ window._bgAudio.play().catch(function(){}); } }
-  document.querySelectorAll('audio,video').forEach(function(a){ if(!a.paused) return; a.play().catch(function(){}); });
-})()">
-  <div style="font-size:1.1rem;letter-spacing:0.3em;text-transform:uppercase;color:#e0e8f0;margin-bottom:16px;">
-    Aeon Trespass Odyssey
-  </div>
-  <div style="font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;color:#9aaabb;margin-bottom:40px;">
-    Libro-Juego Digital
-  </div>
-  <div style="
-    border:1px solid #1e2a45;
-    padding:14px 40px;
-    border-radius:6px;
-    color:#ffffff;
-    font-size:0.9rem;
-    letter-spacing:0.15em;
-    text-transform:uppercase;
-  ">Entrar</div>
-</div>
+
 <style>
   .flame-side {
     position: fixed; top: var(--flame-top, 68px);
@@ -2191,5 +2164,6 @@ function startApp() {
   setTimeout(setFlameTop, 500);
 })();
 </script>
+<script>document.addEventListener("DOMContentLoaded", function(){ if(typeof startApp === "function") startApp(); });</script>
 </body>
 </html>
