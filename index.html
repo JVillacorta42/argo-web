@@ -26,7 +26,7 @@
   .overlay {
     position: fixed;
     inset: 0;
-    background: rgba(6,8,15,0.45);
+    background: rgba(6,8,15,0.15);
     z-index: 1;
   }
   body {
@@ -74,23 +74,25 @@
   }
   .cycle-btn {
     display: block;
-    background: #ffffff;
-    border: 2px solid #ffffff;
-    color: #000000;
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.55);
+    color: #ffffff;
     padding: 18px 32px;
     border-radius: 6px;
     text-decoration: none;
     transition: background 0.2s, transform 0.15s;
     cursor: pointer;
     font-family: 'Cinzel', Georgia, serif;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
   }
   .cycle-btn:hover {
-    background: #e8e8e8;
+    background: rgba(255,255,255,0.28);
     transform: translateY(-2px);
   }
   .cycle-btn .num {
     font-size: 0.65rem;
-    color: #444;
+    color: rgba(255,255,255,0.7);
     letter-spacing: 0.25em;
     text-transform: uppercase;
     display: block;
@@ -99,7 +101,7 @@
   }
   .cycle-btn .name {
     font-size: 1.05rem;
-    color: #000000;
+    color: #ffffff;
     letter-spacing: 0.06em;
     font-weight: 900;
   }
