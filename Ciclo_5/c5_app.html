@@ -2165,5 +2165,97 @@ function startApp() {
 })();
 </script>
 <script>document.addEventListener("DOMContentLoaded", function(){ if(typeof startApp === "function") startApp(); });</script>
+
+<style>
+  #battleIntroC5 {
+    display:none; position:fixed; inset:0; z-index:1200;
+    background:#000; opacity:0; transition:opacity 1.2s ease;
+  }
+  #battleIntroC5.open { display:block; }
+  #battleIntroC5.visible { opacity:1; }
+  #battleIntroC5.hiding { opacity:0; }
+  #battleIntroC5Video { width:100%; height:100%; object-fit:cover; }
+  #battleIntroC5Overlay {
+    position:absolute; inset:0;
+    background:linear-gradient(to bottom,rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.05) 40%,rgba(0,0,0,0.5) 80%,rgba(0,0,0,0.78) 100%);
+  }
+  #battleIntroC5Content {
+    position:absolute; inset:0; display:flex; flex-direction:column;
+    align-items:center; justify-content:flex-end; padding-bottom:72px; gap:16px;
+  }
+  #battleIntroC5Title {
+    font-family:Georgia,serif; font-size:28px; font-style:italic;
+    letter-spacing:0.22em; color:#c03030;
+    text-shadow:0 0 40px #c0303099,0 2px 8px #000;
+  }
+  #battleIntroC5Sep { width:160px; height:1px; background:linear-gradient(90deg,transparent,#c03030,transparent); }
+  #battleIntroC5Btn {
+    background:transparent; border:1px solid #8b1414; color:#c03030;
+    font-family:Georgia,serif; font-style:italic; font-size:15px;
+    letter-spacing:0.22em; padding:12px 42px; cursor:pointer;
+    border-radius:2px; transition:all 0.25s; text-shadow:0 0 12px #c0303066;
+  }
+  #battleIntroC5Btn:hover { background:#c0303018; border-color:#c03030; color:#ff6060; box-shadow:0 0 28px #c0303044; transform:translateY(-2px); }
+  #battleIntroC5Skip { font-family:Georgia,serif; font-size:11px; color:#6a3030; letter-spacing:0.2em; cursor:pointer; background:none; border:none; transition:color 0.2s; }
+  #battleIntroC5Skip:hover { color:#c03030; }
+</style>
+<script>
+(function() {
+  var BATTLE_VIDEOS = [
+    'https://github.com/JVillacorta42/argo-web/releases/download/v1.0-media/Firefly1.mp4',
+    'https://github.com/JVillacorta42/argo-web/releases/download/v1.0-media/FIrefly2.mp4',
+    'https://github.com/JVillacorta42/argo-web/releases/download/v1.0-media/Firefly3.mp4'
+  ];
+  var div = document.createElement('div');
+  div.id = 'battleIntroC5';
+  div.innerHTML =
+    '<video id=battleIntroC5Video autoplay muted playsinline></video>' +
+    '<div id=battleIntroC5Overlay></div>' +
+    '<div id=battleIntroC5Content>' +
+      '<div id=battleIntroC5Title>BATALLA</div>' +
+      '<div id=battleIntroC5Sep></div>' +
+      '<button id=battleIntroC5Btn>ENTRAR</button>' +
+      '<button id=battleIntroC5Skip>omitir</button>' +
+    '</div>';
+  document.body.appendChild(div);
+
+  function openBattleIntro(originalFn) {
+    var intro = document.getElementById('battleIntroC5');
+    var src = BATTLE_VIDEOS[Math.floor(Math.random() * BATTLE_VIDEOS.length)];
+    var oldVid = document.getElementById('battleIntroC5Video');
+    var vid = document.createElement('video');
+    vid.id = 'battleIntroC5Video';
+    vid.muted = true; vid.playsInline = true;
+    vid.style.cssText = 'width:100%;height:100%;object-fit:cover;';
+    oldVid.parentNode.replaceChild(vid, oldVid);
+    vid.src = src; vid.play().catch(function(){});
+    intro.classList.add('open');
+    requestAnimationFrame(function() { requestAnimationFrame(function() { intro.classList.add('visible'); }); });
+    var bg = window._bgAudio;
+    if (bg) { var sv = bg.volume, fi = 0; var fo = setInterval(function() { fi++; bg.volume = Math.max(0, sv*(1-fi/20)); if(fi>=20){clearInterval(fo);bg.pause();}},50); }
+    var bat = new Audio('https://github.com/JVillacorta42/argo-web/releases/download/v1.0-media/batalla.mp3');
+    bat.loop = true; bat.volume = 0; bat._src = 'https://github.com/JVillacorta42/argo-web/releases/download/v1.0-media/batalla.mp3';
+    bat.play().catch(function(){});
+    var j = 0; var iv = setInterval(function(){ j++; bat.volume = Math.min(0.5,(j/30)*0.5); if(j>=30)clearInterval(iv); }, 50);
+    window._bgAudio = bat;
+    function enter() {
+      intro.classList.remove('visible'); intro.classList.add('hiding');
+      setTimeout(function() { intro.classList.remove('open','hiding'); vid.pause(); vid.src=''; originalFn(); }, 1000);
+    }
+    document.getElementById('battleIntroC5Btn').onclick = enter;
+    document.getElementById('battleIntroC5Skip').onclick = enter;
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var tab = document.querySelector('#tab-batallas');
+    if (tab) {
+      tab.removeAttribute('onclick');
+      tab.addEventListener('click', function() {
+        openBattleIntro(function() { if(typeof showTab==='function') showTab('batallas', document.getElementById('tab-batallas')); });
+      });
+    }
+  });
+})();
+</script>
 </body>
 </html>
