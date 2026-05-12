@@ -2202,9 +2202,9 @@ function startApp() {
 <script>
 (function() {
   var BATTLE_VIDEOS = [
-    'https://github.com/JVillacorta42/argo-web/releases/download/v1.0-media/Firefly1.mp4',
-    'https://github.com/JVillacorta42/argo-web/releases/download/v1.0-media/FIrefly2.mp4',
-    'https://github.com/JVillacorta42/argo-web/releases/download/v1.0-media/Firefly3.mp4'
+    '../Firefly1.mp4',
+    '../Firefly2.mp4',
+    '../Firefly3.mp4'
   ];
   var div = document.createElement('div');
   div.id = 'battleIntroC5';
@@ -2228,9 +2228,13 @@ function startApp() {
     vid.muted = true; vid.playsInline = true;
     vid.style.cssText = 'width:100%;height:100%;object-fit:cover;';
     oldVid.parentNode.replaceChild(vid, oldVid);
-    vid.src = src; vid.play().catch(function(){});
     intro.classList.add('open');
-    requestAnimationFrame(function() { requestAnimationFrame(function() { intro.classList.add('visible'); }); });
+    vid.src = src;
+    vid.addEventListener('canplay', function() {
+      vid.play().catch(function(){});
+      requestAnimationFrame(function() { requestAnimationFrame(function() { intro.classList.add('visible'); }); });
+    }, {once: true});
+    setTimeout(function() { if (!intro.classList.contains('visible')) { vid.play().catch(function(){}); intro.classList.add('visible'); } }, 4000);
     var bg = window._bgAudio;
     if (bg) { var sv = bg.volume, fi = 0; var fo = setInterval(function() { fi++; bg.volume = Math.max(0, sv*(1-fi/20)); if(fi>=20){clearInterval(fo);bg.pause();}},50); }
     var bat = new Audio('https://github.com/JVillacorta42/argo-web/releases/download/v1.0-media/batalla.mp3');
