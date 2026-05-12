@@ -1484,8 +1484,8 @@ function toggleTheme() {
 
 // ── Tab switching ─────────────────────────────────
 // ── Background music ──────────────────────────────
-var _C5_TRACKS = ['https://pub-bb3d2e6c8ba646269fcdc3a80200e68c.r2.dev/Ciclo_5/Musica/principal.mp3', 'https://pub-bb3d2e6c8ba646269fcdc3a80200e68c.r2.dev/Ciclo_5/Musica/Principal1.mp3'];
-var _BATTLE_TRACKS = ['https://pub-bb3d2e6c8ba646269fcdc3a80200e68c.r2.dev/Ciclo_5/Musica/Battle1.mp3', 'https://pub-bb3d2e6c8ba646269fcdc3a80200e68c.r2.dev/Ciclo_5/Musica/Battle2.mp3', 'https://pub-bb3d2e6c8ba646269fcdc3a80200e68c.r2.dev/Ciclo_5/Musica/Battle3.mp3'];
+var _C5_TRACKS = ['https://github.com/JVillacorta42/argo-web/releases/download/v1.0-media/principal.mp3', 'https://github.com/JVillacorta42/argo-web/releases/download/v1.0-media/Principal1.mp3'];
+var _BATTLE_TRACKS = ['https://github.com/JVillacorta42/argo-web/releases/download/v1.0-media/Battle1.mp3', 'https://github.com/JVillacorta42/argo-web/releases/download/v1.0-media/Battle2.mp3', 'https://github.com/JVillacorta42/argo-web/releases/download/v1.0-media/Battle3.mp3'];
 
 function _randomTrack() {
   return _C5_TRACKS[Math.floor(Math.random() * _C5_TRACKS.length)];
@@ -1996,18 +1996,18 @@ function _stopNarrate() {
 // ── Despertar ─────────────────────────────────────
 var _despertarSelected = null;
 var _godList = [
-  {name: 'Ares',       src: 'DIOSES/Ares.webp',        music: 'https://pub-bb3d2e6c8ba646269fcdc3a80200e68c.r2.dev/Ares.mp3'},
-  {name: 'Artemis',    src: 'DIOSES/Artemis.webp',      music: 'https://pub-bb3d2e6c8ba646269fcdc3a80200e68c.r2.dev/Artemis.mp3'},
-  {name: 'Athena',     src: 'DIOSES/Athena.webp',       music: 'https://pub-bb3d2e6c8ba646269fcdc3a80200e68c.r2.dev/Atenea.mp3'},
-  {name: 'Demeter',    src: 'DIOSES/Demeter.webp',      music: 'https://pub-bb3d2e6c8ba646269fcdc3a80200e68c.r2.dev/Demeter.mp3'},
-  {name: 'Hades',      src: 'DIOSES/Hades.webp',        music: 'https://pub-bb3d2e6c8ba646269fcdc3a80200e68c.r2.dev/Hades.mp3'},
-  {name: 'Hephaistos', src: 'DIOSES/Hephaistos.webp',   music: 'https://pub-bb3d2e6c8ba646269fcdc3a80200e68c.r2.dev/Hephaesto.mp3'},
-  {name: 'Hermes',     src: 'DIOSES/Hermes.webp',       music: 'https://pub-bb3d2e6c8ba646269fcdc3a80200e68c.r2.dev/Hermes.mp3'},
-  {name: 'Poseidon',   src: 'DIOSES/Poseidon.webp',     music: 'https://pub-bb3d2e6c8ba646269fcdc3a80200e68c.r2.dev/Poseidon.mp3'},
-  {name: 'Zeus',       src: 'DIOSES/Zeus.webp',         music: 'https://pub-bb3d2e6c8ba646269fcdc3a80200e68c.r2.dev/Zeus.mp3'},
-  {name: 'Aphrodite',  src: 'DIOSES/aphrodite3.webp',   music: 'https://pub-bb3d2e6c8ba646269fcdc3a80200e68c.r2.dev/Afrodita.mp3'},
-  {name: 'Dionysus',   src: 'DIOSES/dionysus6.webp',    music: 'https://pub-bb3d2e6c8ba646269fcdc3a80200e68c.r2.dev/Dionisio.mp3'},
-  {name: 'Hera',       src: 'DIOSES/hera3.webp',        music: 'https://pub-bb3d2e6c8ba646269fcdc3a80200e68c.r2.dev/hera.mp3'},
+  {name: 'Ares',       src: 'DIOSES/Ares.webp',        music: 'https://github.com/JVillacorta42/argo-web/releases/download/v1.0-media/Ares.mp3'},
+  {name: 'Artemis',    src: 'DIOSES/Artemis.webp',      music: 'https://github.com/JVillacorta42/argo-web/releases/download/v1.0-media/Artemis.mp3'},
+  {name: 'Athena',     src: 'DIOSES/Athena.webp',       music: 'https://github.com/JVillacorta42/argo-web/releases/download/v1.0-media/Atenea.mp3'},
+  {name: 'Demeter',    src: 'DIOSES/Demeter.webp',      music: 'https://github.com/JVillacorta42/argo-web/releases/download/v1.0-media/Demeter.mp3'},
+  {name: 'Hades',      src: 'DIOSES/Hades.webp',        music: 'https://github.com/JVillacorta42/argo-web/releases/download/v1.0-media/Hades.mp3'},
+  {name: 'Hephaistos', src: 'DIOSES/Hephaistos.webp',   music: 'https://github.com/JVillacorta42/argo-web/releases/download/v1.0-media/Hephaesto.mp3'},
+  {name: 'Hermes',     src: 'DIOSES/Hermes.webp',       music: 'https://github.com/JVillacorta42/argo-web/releases/download/v1.0-media/Hermes.mp3'},
+  {name: 'Poseidon',   src: 'DIOSES/Poseidon.webp',     music: 'https://github.com/JVillacorta42/argo-web/releases/download/v1.0-media/Poseidon.mp3'},
+  {name: 'Zeus',       src: 'DIOSES/Zeus.webp',         music: 'https://github.com/JVillacorta42/argo-web/releases/download/v1.0-media/Zeus.mp3'},
+  {name: 'Aphrodite',  src: 'DIOSES/aphrodite3.webp',   music: 'https://github.com/JVillacorta42/argo-web/releases/download/v1.0-media/Afrodita.mp3'},
+  {name: 'Dionysus',   src: 'DIOSES/dionysus6.webp',    music: 'https://github.com/JVillacorta42/argo-web/releases/download/v1.0-media/Dionisio.mp3'},
+  {name: 'Hera',       src: 'DIOSES/hera3.webp',        music: 'https://github.com/JVillacorta42/argo-web/releases/download/v1.0-media/hera.mp3'},
 ];
 var _godIdx = 0;
 
@@ -2070,12 +2070,12 @@ function confirmarDespertar() {
 
   // Play god mp3, then thunder, then despertar
   var _selectedGod = _godList.find(function(g){ return g.name === _despertarSelected; });
-  var _godMusic = (_selectedGod && _selectedGod.music) ? _selectedGod.music : 'https://pub-bb3d2e6c8ba646269fcdc3a80200e68c.r2.dev/Zeus.mp3';
+  var _godMusic = (_selectedGod && _selectedGod.music) ? _selectedGod.music : 'https://github.com/JVillacorta42/argo-web/releases/download/v1.0-media/Zeus.mp3';
   var a1 = new Audio(_godMusic);
   a1.volume = Math.min(1, vol * 1.3);
   a1.play();
   a1.onended = function() {
-    var a2 = new Audio('https://pub-bb3d2e6c8ba646269fcdc3a80200e68c.r2.dev/thunder.mp3');
+    var a2 = new Audio('https://github.com/JVillacorta42/argo-web/releases/download/v1.0-media/thunder.mp3');
     a2.volume = vol;
     a2.play();
     // Fade battle music from 15% to 0 over thunder
@@ -2093,7 +2093,7 @@ function confirmarDespertar() {
 
 function playDespertar() {
   var vol = document.getElementById('volSlider') ? parseFloat(document.getElementById('volSlider').value) : 0.5;
-  var a3 = new Audio('https://pub-bb3d2e6c8ba646269fcdc3a80200e68c.r2.dev/despertar.mp3');
+  var a3 = new Audio('https://github.com/JVillacorta42/argo-web/releases/download/v1.0-media/despertar.mp3');
   a3.volume = vol;
   a3.play();
   window._bgAudio = a3;
