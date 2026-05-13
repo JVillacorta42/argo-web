@@ -956,7 +956,9 @@
     <span class="tab-sep"></span>
     <button class="tab-btn tab-aventura" id="tab-sots" onclick="showTab('sots', this)">Sermón en los Bajíos</button>
     <span class="tab-sep"></span>
-    <button class="tab-btn tab-aventura" id="tab-mnemos" onclick="showTab('mnemos', this)">MNEMOS</button>
+    <button class="tab-btn tab-aventura" id="tab-mnemos" onclick="showTab('mnemos', this)">MNEMOS</button
+    <span class="tab-sep"></span>
+    <button class="tab-btn tab-aventura" id="tab-oi" onclick="showTab('oi', this)">ODISEA</button>>
   </div>
   <div class="nav-bar">
     <button id="backBtn" class="back-btn" onclick="goBack()">&#8592; Volver</button>
@@ -1018,6 +1020,7 @@
 <script src="Aventuras_secudarias/rr_data.js"></script>
 <script src="Aventuras_secudarias/sots_data.js"></script>
 <script src="Aventuras_secudarias/mnemos_data.js"></script>
+<script src="Aventuras_secudarias/oi_data.js"></script>
 <script>
 'use strict';
 
@@ -1060,6 +1063,9 @@ if (typeof SOTS_DATA !== 'undefined') {
 }
 if (typeof MNEMOS_DATA !== 'undefined') {
   Object.keys(MNEMOS_DATA).forEach(function(k) { _DATA[k] = MNEMOS_DATA[k]; });
+if (typeof OI_DATA !== 'undefined') {
+  Object.keys(OI_DATA).forEach(function(k) { _DATA[k] = OI_DATA[k]; });
+}
 }
 if (typeof BATALLAS_DATA !== 'undefined') {
   Object.keys(BATALLAS_DATA).forEach(function(k) { _DATA[k] = BATALLAS_DATA[k]; });
