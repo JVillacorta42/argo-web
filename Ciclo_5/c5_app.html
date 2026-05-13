@@ -2267,5 +2267,66 @@ function startApp() {
   });
 })();
 </script>
+
+<style>
+#disclaimer-overlay {
+  position: fixed; inset: 0; z-index: 999999;
+  background: rgba(6,8,15,0.97);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+  font-family: 'Segoe UI', Georgia, serif;
+}
+#disclaimer-box {
+  max-width: 620px;
+  width: 100%;
+  border: 1px solid #1e2a45;
+  border-radius: 8px;
+  padding: 32px 36px;
+  background: #0d1220;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+#disclaimer-box h2 {
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #e0e8f0;
+  margin-bottom: 4px;
+}
+#disclaimer-box p {
+  font-size: 0.78rem;
+  color: #9aaabb;
+  line-height: 1.65;
+}
+#disclaimer-btn {
+  margin-top: 8px;
+  align-self: center;
+  border: 1px solid rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.1);
+  color: #ffffff;
+  padding: 12px 48px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#disclaimer-btn:hover { background: rgba(255,255,255,0.22); }
+</style>
+<div id="disclaimer-overlay">
+  <div id="disclaimer-box">
+    <h2>Aviso legal / Disclaimer</h2>
+    <p>Esta aplicación es una creación fan, realizada sin ánimo de lucro y con el único propósito de servir como herramienta de apoyo para jugadores y aficionados.</p>
+    <p>Esta aplicación no es oficial, no está licenciada, no está afiliada, no está patrocinada, no está aprobada ni ha sido respaldada oficialmente por los creadores, autores, editoriales, distribuidores o titulares de derechos del juego de mesa en el que se inspira.</p>
+    <p>Todos los nombres, marcas, logotipos, ilustraciones, textos, símbolos, mecánicas, componentes, términos propios y demás elementos relacionados con el juego pertenecen a sus respectivos propietarios y titulares de derechos.</p>
+    <p>El uso de cualquier referencia al juego se realiza únicamente con fines informativos, organizativos y de apoyo a la experiencia de juego. Esta aplicación no pretende sustituir al juego original, sus manuales, componentes oficiales ni ningún producto comercial asociado.</p>
+    <p>La aplicación se distribuye de forma gratuita y no genera ingresos directos ni indirectos para su creador. Si los titulares de derechos consideran que algún contenido debe ser modificado o retirado, podrán solicitarlo y se atenderá dicha petición a la mayor brevedad posible.</p>
+    <button id="disclaimer-btn" onclick="document.getElementById('disclaimer-overlay').remove()">Comenzar</button>
+  </div>
+</div>
 </body>
 </html>
