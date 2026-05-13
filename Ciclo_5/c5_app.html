@@ -737,6 +737,7 @@
   .narrating { background: #2a104833; border-radius: 3px; transition: background 0.3s; }
   body.day .narrating { background: #c8a8e855; }
   #narrateBtn.active { border-color: #c080f0; color: #e8c8ff; background: #1e0e38; }
+  #narrateBtn.paused { border-color: #7040a0; color: #c090e0; background: #150a28; }
 
   /* ── Despertar button ────────────────────────── */
   #despertarBtnWrap {
@@ -1636,6 +1637,7 @@ function goTo(docId, secId) {
   }
   _updateMusic(docId, secId);
   state.secId = secId;
+  if (typeof _narrateIdx !== 'undefined') _narrateIdx = -1;
   if (typeof _stopNarrate === 'function') _stopNarrate();
   updateBackBtn();
   render();
@@ -1653,6 +1655,7 @@ function goBack() {
     state.doc = prev.doc;
   }
   state.secId = prev.secId;
+  if (typeof _narrateIdx !== 'undefined') _narrateIdx = -1;
   if (typeof _stopNarrate === 'function') _stopNarrate();
   updateBackBtn();
   render();
@@ -2044,6 +2047,7 @@ function startApp() {
   var _ttsAudio = null;
   var _fishOk = true;
   var _forceWebSpeech = !!localStorage.getItem('argo_tts_voice');
+  var _narrateIdx = -1;
 
   var _tts = window.speechSynthesis;
   var _ttsVoice = null;
@@ -2165,7 +2169,12 @@ function startApp() {
   }
 
   function _speakParas(paras, idx) {
-    if (!_ttsActive || idx >= paras.length) { _stopNarrate(); return; }
+    if (!_ttsActive || idx >= paras.length) {
+      _narrateIdx = -1;
+      _stopNarrate();
+      return;
+    }
+    _narrateIdx = idx;
     var p = paras[idx];
     document.querySelectorAll('.narrating').forEach(function(el){ el.classList.remove('narrating'); });
     p.classList.add('narrating');
@@ -2188,18 +2197,33 @@ function startApp() {
     }, stepTime);
   }
 
+  function _updateNarrateBtn() {
+    var btn = document.getElementById('narrateBtn');
+    if (_ttsActive) {
+      btn.classList.add('active'); btn.classList.remove('paused');
+      btn.title = 'Pausar narración';
+    } else if (_narrateIdx >= 0) {
+      btn.classList.remove('active'); btn.classList.add('paused');
+      btn.title = 'Reanudar narración';
+    } else {
+      btn.classList.remove('active', 'paused');
+      btn.title = 'Narrador';
+    }
+  }
+
   function toggleNarrate() {
     if (_ttsActive) {
       _stopNarrate();
     } else {
       _ttsActive = true;
       _fishOk = true;
-      document.getElementById('narrateBtn').classList.add('active');
       if (window._bgAudio) {
         window._preNarrateVol = window._bgAudio.volume;
         _fadeMusicTo(0.2, 800);
       }
-      _speakParas(_getParagraphs(), 0);
+      var startIdx = _narrateIdx >= 0 ? _narrateIdx : 0;
+      _updateNarrateBtn();
+      _speakParas(_getParagraphs(), startIdx);
     }
   }
 
@@ -2208,7 +2232,7 @@ function startApp() {
     if (_ttsAudio) { _ttsAudio.pause(); _ttsAudio = null; }
     try { _tts.cancel(); } catch(e){}
     document.querySelectorAll('.narrating').forEach(function(el){ el.classList.remove('narrating'); });
-    document.getElementById('narrateBtn').classList.remove('active');
+    _updateNarrateBtn();
     if (window._bgAudio && window._preNarrateVol !== undefined) {
       _fadeMusicTo(window._preNarrateVol, 800);
       window._preNarrateVol = undefined;
