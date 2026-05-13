@@ -1,7 +1,8 @@
 (function () {
   var VALID_TOKENS = [
     '53287951-0b18-42d8-acfd-61d36d056945', // Javier_Bris
-    '1825a09a-e5ca-4d76-8932-745b54127fc6'  // Admin
+    '1825a09a-e5ca-4d76-8932-745b54127fc6',  // Admin
+    '5e8f2eec-2b0b-4c9f-bfed-b94c231a938e'  // Admin2
   ];
   var STORAGE_KEY = 'argo_access';
 
