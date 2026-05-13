@@ -2014,6 +2014,135 @@ function startApp() {
   }
 })();
 
+  // ── narrator ──────────────────────────────────────
+  var _ttsActive = false;
+  var _ttsAudio = null;
+  var _fishOk = true;
+
+  var _tts = window.speechSynthesis;
+  var _ttsVoice = null;
+  function _loadVoice() {
+    var v = _tts.getVoices();
+    if (!v.length || _ttsVoice) return;
+    _ttsVoice = v.find(function(x){ return /juan/i.test(x.name); })
+             || v.find(function(x){ return x.lang === 'es-CR'; })
+             || v.find(function(x){ return x.lang.startsWith('es'); })
+             || null;
+  }
+  if (_tts.onvoiceschanged !== undefined) _tts.onvoiceschanged = _loadVoice;
+  setTimeout(_loadVoice, 300);
+
+  function _getParagraphs() {
+    return Array.from(document.querySelectorAll(
+      '#viewer p.narrative, #viewer p.dialogue, #viewer p.italic-note, #viewer p.choice-result'
+    ));
+  }
+
+  function _speakWithWebSpeech(text, paras, idx) {
+    if (!_ttsActive) return;
+    _loadVoice();
+    var utt = new SpeechSynthesisUtterance(text);
+    if (_ttsVoice) { utt.voice = _ttsVoice; utt.lang = _ttsVoice.lang; }
+    else { utt.lang = 'es-ES'; }
+    utt.rate = 0.95;
+    utt.onend  = function() { _speakParas(paras, idx + 1); };
+    utt.onerror = function() { _speakParas(paras, idx + 1); };
+    _tts.speak(utt);
+  }
+
+  function _splitSegments(text) {
+    var segs = [], re = /(["\u201c\u00ab])([\s\S]*?)(["\u201d\u00bb])/g, lastIdx = 0, m;
+    while ((m = re.exec(text)) !== null) {
+      var before = text.slice(lastIdx, m.index).trim();
+      if (before) segs.push({ t: before, dial: false });
+      segs.push({ t: m[0].trim(), dial: true });
+      lastIdx = m.index + m[0].length;
+    }
+    var after = text.slice(lastIdx).trim();
+    if (after) segs.push({ t: after, dial: false });
+    if (!segs.length) return [{ t: text, dial: /^—/.test(text) }];
+    return segs.filter(function(s){ return s.t.length > 1; });
+  }
+
+  function _speakSegments(segs, si, paras, pi) {
+    if (!_ttsActive) return;
+    if (si >= segs.length) { _speakParas(paras, pi + 1); return; }
+    var s = segs[si];
+    if (!s.t) { _speakSegments(segs, si + 1, paras, pi); return; }
+    fetch('http://127.0.0.1:7823/tts', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text: s.t, voice: s.dial ? 'dial' : 'narr' })
+    }).then(function(res) {
+      if (!res.ok) return res.text().then(function(t){ throw new Error('HTTP ' + res.status + ' ' + t.substring(0,80)); });
+      return res.blob();
+    }).then(function(blob) {
+      if (!_ttsActive) return;
+      var url = URL.createObjectURL(blob);
+      if (_ttsAudio) _ttsAudio.pause();
+      _ttsAudio = new Audio(url);
+      var pp = _ttsAudio.play();
+      if (pp) pp.catch(function(e){ console.warn('[TTS play]', e); });
+      _ttsAudio.onended = function() { URL.revokeObjectURL(url); _speakSegments(segs, si + 1, paras, pi); };
+      _ttsAudio.onerror = function(e) { URL.revokeObjectURL(url); _speakSegments(segs, si + 1, paras, pi); };
+    }).catch(function(err) {
+      console.warn('[TTS] proxy no disponible, usando Web Speech:', err.message);
+      _fishOk = false;
+      _speakWithWebSpeech(s.t, paras, pi);
+    });
+  }
+
+  function _speakParas(paras, idx) {
+    if (!_ttsActive || idx >= paras.length) { _stopNarrate(); return; }
+    var p = paras[idx];
+    document.querySelectorAll('.narrating').forEach(function(el){ el.classList.remove('narrating'); });
+    p.classList.add('narrating');
+    p.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    var text = p.innerText.trim();
+    if (!text) { _speakParas(paras, idx + 1); return; }
+    if (!_fishOk) { _speakWithWebSpeech(text, paras, idx); return; }
+    _speakSegments(_splitSegments(text), 0, paras, idx);
+  }
+
+  function _fadeMusicTo(targetVol, durationMs) {
+    var bg = window._bgAudio;
+    if (!bg) return;
+    var startVol = bg.volume;
+    var steps = 20, stepTime = durationMs / steps, step = 0;
+    var iv = setInterval(function() {
+      step++;
+      bg.volume = Math.max(0, Math.min(1, startVol + (targetVol - startVol) * (step / steps)));
+      if (step >= steps) { clearInterval(iv); bg.volume = targetVol; }
+    }, stepTime);
+  }
+
+  function toggleNarrate() {
+    if (_ttsActive) {
+      _stopNarrate();
+    } else {
+      _ttsActive = true;
+      _fishOk = true;
+      document.getElementById('narrateBtn').classList.add('active');
+      if (window._bgAudio) {
+        window._preNarrateVol = window._bgAudio.volume;
+        _fadeMusicTo(0.2, 800);
+      }
+      _speakParas(_getParagraphs(), 0);
+    }
+  }
+
+  function _stopNarrate() {
+    _ttsActive = false;
+    if (_ttsAudio) { _ttsAudio.pause(); _ttsAudio = null; }
+    try { _tts.cancel(); } catch(e){}
+    document.querySelectorAll('.narrating').forEach(function(el){ el.classList.remove('narrating'); });
+    document.getElementById('narrateBtn').classList.remove('active');
+    if (window._bgAudio && window._preNarrateVol !== undefined) {
+      _fadeMusicTo(window._preNarrateVol, 800);
+      window._preNarrateVol = undefined;
+    }
+  }
+
 </script>
 
 
