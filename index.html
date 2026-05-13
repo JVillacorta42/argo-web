@@ -117,16 +117,6 @@
     transition: color 0.2s, border-color 0.2s;
   }
   .matrix-link:hover { color: var(--gold); border-color: var(--gold); }
-  #entry-overlay {
-    position: fixed; inset: 0; z-index: 99999;
-    background: rgba(6,8,15,0.97);
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    cursor: pointer;
-  }
-  #entry-overlay .entry-title { font-size:1.1rem; letter-spacing:0.3em; text-transform:uppercase; color:#e0e8f0; margin-bottom:16px; }
-  #entry-overlay .entry-sub { font-size:0.75rem; letter-spacing:0.2em; text-transform:uppercase; color:#9aaabb; margin-bottom:40px; }
-  #entry-overlay .entry-btn { border:1px solid #1e2a45; padding:14px 40px; border-radius:6px; color:#ffffff; font-size:0.9rem; letter-spacing:0.15em; text-transform:uppercase; }
 </style>
 </head>
 <body>
@@ -137,22 +127,13 @@
     <source src="portada_2.mp4" type="video/mp4">
   </video>
   <div class="overlay"></div>
-  <div id="entry-overlay" onclick="(function(){
-    document.getElementById('entry-overlay').remove();
-    var a = document.getElementById('portada-audio');
-    if(a){ a.volume=0.5; a.play().catch(function(){}); }
-  })()">
-    <div class="entry-title">Aeon Trespass Odyssey</div>
-    <div class="entry-sub">Libro-Juego Digital</div>
-    <div class="entry-btn">Entrar</div>
-  </div>
   <div class="content">
   <div class="cycles">
-    <a class="cycle-btn" href="argo.html">
+    <a class="cycle-btn" href="argo.html" onclick="var a=document.getElementById('portada-audio');if(a){a.volume=0.5;a.play().catch(function(){});}">
       <span class="num">Ciclo IV</span>
       <span class="name">Jardines del Crecimiento Infinito</span>
     </a>
-    <a class="cycle-btn" href="Ciclo_5/c5_app.html">
+    <a class="cycle-btn" href="Ciclo_5/c5_app.html" onclick="var a=document.getElementById('portada-audio');if(a){a.volume=0.5;a.play().catch(function(){});}">
       <span class="num">Ciclo V</span>
       <span class="name">El Profeta</span>
     </a>
