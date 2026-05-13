@@ -917,6 +917,30 @@
   }
   .despertar-cancel-btn:hover { border-color: #d4a84b; color: #e8d9b5; }
 
+  #voiceModal {
+    display: none; position: fixed; inset: 0; z-index: 600;
+    background: #000000cc; align-items: center; justify-content: center;
+  }
+  #voiceModal.open { display: flex; }
+  .voice-panel {
+    background: #120d00; border: 1px solid #8b6914; border-radius: 6px;
+    padding: 1rem 1.2rem; min-width: 280px; max-width: 440px; max-height: 72vh;
+    display: flex; flex-direction: column; box-shadow: 0 8px 40px #000c;
+  }
+  .voice-panel-title {
+    font-family: 'Adonis-Regular', Georgia, serif; color: #d4a843;
+    font-size: 1.05em; text-align: center; padding-bottom: 0.5rem;
+    margin-bottom: 0.4rem; border-bottom: 1px solid #4a3510;
+  }
+  .voice-list { overflow-y: auto; flex: 1; }
+  .voice-item {
+    display: block; width: 100%; background: none; border: none;
+    border-bottom: 1px solid #1e1400; color: #b89a50; font-size: 0.82em;
+    text-align: left; padding: 0.45rem 0.6rem; cursor: pointer;
+  }
+  .voice-item:hover { background: #2a1a00; color: #f2e4b8; }
+  .voice-item.selected { background: #3a2500; color: #f2e4b8; font-weight: bold; }
+
 </style>
 </head>
 <body>
@@ -972,6 +996,7 @@
              oninput="if(window._bgAudio) window._bgAudio.volume = +this.value;">
     </div>
 
+    <button class="ctrl-btn" onclick="openVoiceSelector()" title="Seleccionar narrador">&#127897;</button>
     <button class="ctrl-btn" id="narrateBtn" onclick="toggleNarrate()" title="Narrador">&#128364;</button>
     <button class="ctrl-btn" id="fontBtn" onclick="cycleFont()" title="Tamaño de fuente">A</button>
     <button class="ctrl-btn" id="themeBtn" onclick="toggleTheme()" title="Modo día/noche">&#9790;</button>
@@ -2018,12 +2043,19 @@ function startApp() {
   var _ttsActive = false;
   var _ttsAudio = null;
   var _fishOk = true;
+  var _forceWebSpeech = !!localStorage.getItem('argo_tts_voice');
 
   var _tts = window.speechSynthesis;
   var _ttsVoice = null;
   function _loadVoice() {
     var v = _tts.getVoices();
-    if (!v.length || _ttsVoice) return;
+    if (!v.length) return;
+    var saved = localStorage.getItem('argo_tts_voice');
+    if (saved) {
+      var found = v.find(function(x){ return x.name === saved; });
+      if (found) { _ttsVoice = found; return; }
+    }
+    if (_ttsVoice) return;
     _ttsVoice = v.find(function(x){ return /juan/i.test(x.name); })
              || v.find(function(x){ return x.lang === 'es-CR'; })
              || v.find(function(x){ return x.lang.startsWith('es'); })
@@ -2031,6 +2063,46 @@ function startApp() {
   }
   if (_tts.onvoiceschanged !== undefined) _tts.onvoiceschanged = _loadVoice;
   setTimeout(_loadVoice, 300);
+
+  function openVoiceSelector() {
+    var modal = document.getElementById('voiceModal');
+    var list  = document.getElementById('voiceList');
+    var voices = _tts.getVoices().slice().sort(function(a, b) {
+      return (a.lang.startsWith('es') ? 0 : 1) - (b.lang.startsWith('es') ? 0 : 1)
+          || a.name.localeCompare(b.name);
+    });
+    var saved = localStorage.getItem('argo_tts_voice');
+    list.innerHTML = '';
+    function markSelected(btn) {
+      list.querySelectorAll('.voice-item').forEach(function(b){ b.classList.remove('selected'); });
+      btn.classList.add('selected');
+    }
+    var fishBtn = document.createElement('button');
+    fishBtn.className = 'voice-item' + (!saved ? ' selected' : '');
+    fishBtn.textContent = '\uD83C\uDFA4 Fish Audio (narrador local)';
+    fishBtn.onclick = function() {
+      localStorage.removeItem('argo_tts_voice');
+      _forceWebSpeech = false;
+      _fishOk = true;
+      _ttsVoice = null;
+      _loadVoice();
+      markSelected(this);
+    };
+    list.appendChild(fishBtn);
+    voices.forEach(function(v) {
+      var btn = document.createElement('button');
+      btn.className = 'voice-item' + (saved === v.name ? ' selected' : '');
+      btn.textContent = v.name + ' (' + v.lang + ')';
+      btn.onclick = function() {
+        localStorage.setItem('argo_tts_voice', v.name);
+        _ttsVoice = v;
+        _forceWebSpeech = true;
+        markSelected(this);
+      };
+      list.appendChild(btn);
+    });
+    modal.classList.add('open');
+  }
 
   function _getParagraphs() {
     return Array.from(document.querySelectorAll(
@@ -2100,7 +2172,7 @@ function startApp() {
     p.scrollIntoView({ behavior: 'smooth', block: 'center' });
     var text = p.innerText.trim();
     if (!text) { _speakParas(paras, idx + 1); return; }
-    if (!_fishOk) { _speakWithWebSpeech(text, paras, idx); return; }
+    if (_forceWebSpeech || !_fishOk) { _speakWithWebSpeech(text, paras, idx); return; }
     _speakSegments(_splitSegments(text), 0, paras, idx);
   }
 
@@ -2353,6 +2425,13 @@ function startApp() {
     <p>El uso de cualquier referencia al juego se realiza únicamente con fines informativos, organizativos y de apoyo a la experiencia de juego. Esta aplicación no pretende sustituir al juego original, sus manuales, componentes oficiales ni ningún producto comercial asociado.</p>
     <p>La aplicación se distribuye de forma gratuita y no genera ingresos directos ni indirectos para su creador. Si los titulares de derechos consideran que algún contenido debe ser modificado o retirado, podrán solicitarlo y se atenderá dicha petición a la mayor brevedad posible.</p>
     <button id="disclaimer-btn" onclick="document.getElementById('disclaimer-overlay').remove()">Comenzar</button>
+  </div>
+</div>
+
+<div id="voiceModal" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="voice-panel">
+    <div class="voice-panel-title">Seleccionar narrador</div>
+    <div id="voiceList" class="voice-list"></div>
   </div>
 </div>
 </body>
