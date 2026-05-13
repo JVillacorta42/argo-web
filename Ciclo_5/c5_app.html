@@ -1490,67 +1490,84 @@ function _randomBattleTrack() {
   return _BATTLE_TRACKS[Math.floor(Math.random() * _BATTLE_TRACKS.length)];
 }
 
+function _startTrack(srcOrAudio, vol, fromStart) {
+  // Cancel previous pending neo (race condition guard)
+  if (window._bgPendingNeo) { window._bgPendingNeo._cancelled = true; try{window._bgPendingNeo.pause();}catch(e){} window._bgPendingNeo = null; }
+  var a = (srcOrAudio && typeof srcOrAudio === 'object') ? srcOrAudio : new Audio(srcOrAudio);
+  if (typeof srcOrAudio === 'string') { a.loop = true; a.volume = 0; a._src = srcOrAudio; a.play().catch(function(){}); }
+  window._bgPendingNeo = a;
+  window._bgAudio = a;
+  var vs = document.getElementById('volSlider'); if (vs) vs.value = vol;
+  function _play() {
+    if (a._cancelled) return;
+    window._bgPendingNeo = null;
+    a.currentTime = 0;
+    var j = 0, steps = 30, stepTime = 50;
+    var fadeIn = setInterval(function() {
+      if (a._cancelled) { clearInterval(fadeIn); return; }
+      j++; a.volume = Math.min(vol, vol * (j / steps));
+      if (j >= steps) clearInterval(fadeIn);
+    }, stepTime);
+  }
+  if (a.readyState >= 2) { _play(); } else { a.addEventListener('canplay', function onCP() { a.removeEventListener('canplay', onCP); _play(); }); }
+}
+
+function _cancelPendingFade() {
+  if (window._bgFadeInt) { clearInterval(window._bgFadeInt); window._bgFadeInt = null; if (window._bgFadingOld) { window._bgFadingOld.pause(); window._bgFadingOld = null; } }
+  if (window._bgPendingNeo) { window._bgPendingNeo._cancelled = true; try{window._bgPendingNeo.pause();}catch(e){} window._bgPendingNeo = null; }
+}
+
 function crossfadeTo(src) {
   var vol = +(document.getElementById('volSlider') || {value: 0.4}).value;
+  if (window._bgAudio && window._bgAudio._src === src) {
+    if (window._bgAudio.paused) window._bgAudio.play();
+    return;
+  }
+  _cancelPendingFade();
+  // Pre-load neo immediately so CDN fetch runs in parallel with fade-out
+  var neo = new Audio(src); neo.loop = true; neo.volume = 0; neo._src = src; neo.play().catch(function(){});
   if (window._bgAudio) {
-    if (window._bgAudio._src === src) {
-      if (window._bgAudio.paused) window._bgAudio.play();
-      return;
-    }
     var old = window._bgAudio;
     var steps = 30, stepTime = 50, i = 0, startVol = old.volume;
-    var fadeOut = setInterval(function() {
+    window._bgFadingOld = old;
+    window._bgFadeInt = setInterval(function() {
       i++;
       old.volume = Math.max(0, startVol * (1 - i / steps));
       if (i >= steps) {
-        clearInterval(fadeOut);
+        clearInterval(window._bgFadeInt); window._bgFadeInt = null; window._bgFadingOld = null;
         old.pause();
-        _startTrack(src, vol, false);
+        _startTrack(neo, vol, false);
       }
     }, stepTime);
   } else {
-    _startTrack(src, vol, false);
+    _startTrack(neo, vol, false);
   }
 }
 
 function _crossfadeToBattle(src) {
   var vol = +(document.getElementById('volSlider') || {value: 0.4}).value;
+  _cancelPendingFade();
+  // Pre-load neo immediately
+  var neo = new Audio(src); neo.loop = true; neo.volume = 0; neo._src = src; neo.play().catch(function(){});
   if (window._bgAudio) {
     var old = window._bgAudio;
     var steps = 20, stepTime = 50, i = 0, startVol = old.volume;
-    var fadeOut = setInterval(function() {
+    window._bgFadingOld = old;
+    window._bgFadeInt = setInterval(function() {
       i++;
       old.volume = Math.max(0, startVol * (1 - i / steps));
-      if (i >= steps) { clearInterval(fadeOut); old.pause(); _startTrack(src, vol, true); }
+      if (i >= steps) { clearInterval(window._bgFadeInt); window._bgFadeInt = null; window._bgFadingOld = null; old.pause(); _startTrack(neo, vol, true); }
     }, stepTime);
   } else {
-    _startTrack(src, vol, true);
+    _startTrack(neo, vol, true);
   }
-}
-
-function _startTrack(src, vol, fromStart) {
-  var a = new Audio(src);
-  a.loop = true;
-  a.volume = 0;
-  a._src = src;
-  a.play().catch(function(){});
-  function _play() {
-    a.currentTime = 0;
-    var j = 0, steps = 30, stepTime = 50;
-    var fadeIn = setInterval(function() {
-      j++;
-      a.volume = Math.min(vol, vol * (j / steps));
-      if (j >= steps) clearInterval(fadeIn);
-    }, stepTime);
-  }
-  if (a.readyState >= 1) { _play(); } else { a.addEventListener('loadedmetadata', _play); }
-  window._bgAudio = a;
-  document.getElementById('volSlider').value = vol;
 }
 
 function _stopBgMusic() {
+  _cancelPendingFade();
   if (!window._bgAudio) return;
   var old = window._bgAudio;
+  window._bgAudio = null;
   var steps = 20, stepTime = 50, i = 0, startVol = old.volume;
   var fade = setInterval(function() {
     i++;
