@@ -140,5 +140,25 @@
   </div>
 
 </div>
+<script>
+  (function() {
+    var a = document.getElementById('portada-audio');
+    if (!a) return;
+    a.volume = 0.5;
+    function tryPlay() {
+      a.play().catch(function() {});
+    }
+    // Intento inmediato (funciona si el navegador lo permite)
+    tryPlay();
+    // Si no, al primer click o toque en cualquier parte
+    function onFirstInteraction() {
+      tryPlay();
+      document.removeEventListener('click', onFirstInteraction);
+      document.removeEventListener('touchstart', onFirstInteraction);
+    }
+    document.addEventListener('click', onFirstInteraction);
+    document.addEventListener('touchstart', onFirstInteraction);
+  })();
+</script>
 </body>
 </html>
