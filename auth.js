@@ -38,7 +38,6 @@
       '<div class="box">',
       '<h1>Acceso restringido</h1>',
       '<p>Esta aplicación es de uso privado.<br>Necesitas un enlace de invitación válido para acceder.</p>',
-      '<a href="mailto:">Solicitar acceso</a>',
       '</div>'
     ].join('');
   });
