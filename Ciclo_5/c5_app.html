@@ -998,7 +998,9 @@
     </div>
 
     <button class="ctrl-btn" onclick="openVoiceSelector()" title="Seleccionar narrador">&#127897;</button>
-    <button class="ctrl-btn" id="narrateBtn" onclick="toggleNarrate()" title="Narrador">&#128364;</button>
+    <button class="ctrl-btn" id="narrateBtn" onclick="startNarrate()" title="Iniciar narrador">&#128364;</button>
+    <button class="ctrl-btn" id="pauseBtn" onclick="pauseNarrate()" title="Pausar" style="display:none">&#9646;&#9646;</button>
+    <button class="ctrl-btn" id="resumeBtn" onclick="resumeNarrate()" title="Reanudar" style="display:none">&#9654;</button>
     <button class="ctrl-btn" id="fontBtn" onclick="cycleFont()" title="Tamaño de fuente">A</button>
     <button class="ctrl-btn" id="themeBtn" onclick="toggleTheme()" title="Modo día/noche">&#9790;</button>
   </div>
@@ -2169,7 +2171,8 @@ function startApp() {
   }
 
   function _speakParas(paras, idx) {
-    if (!_ttsActive || idx >= paras.length) {
+    if (!_ttsActive) return;
+    if (idx >= paras.length) {
       _narrateIdx = -1;
       _stopNarrate();
       return;
@@ -2198,37 +2201,45 @@ function startApp() {
   }
 
   function _updateNarrateBtn() {
-    var btn = document.getElementById('narrateBtn');
-    if (_ttsActive) {
-      btn.classList.add('active'); btn.classList.remove('paused');
-      btn.title = 'Pausar narración';
-    } else if (_narrateIdx >= 0) {
-      btn.classList.remove('active'); btn.classList.add('paused');
-      btn.title = 'Reanudar narración';
-    } else {
-      btn.classList.remove('active', 'paused');
-      btn.title = 'Narrador';
+    document.getElementById('narrateBtn').classList.toggle('active', _ttsActive);
+    document.getElementById('pauseBtn').style.display  = _ttsActive ? '' : 'none';
+    document.getElementById('resumeBtn').style.display = (!_ttsActive && _narrateIdx >= 0) ? '' : 'none';
+  }
+
+  function startNarrate() {
+    if (_ttsActive) { _stopNarrate(); return; }
+    _narrateIdx = -1;
+    _ttsActive = true;
+    _fishOk = true;
+    if (window._bgAudio) { window._preNarrateVol = window._bgAudio.volume; _fadeMusicTo(0.2, 800); }
+    _updateNarrateBtn();
+    _speakParas(_getParagraphs(), 0);
+  }
+
+  function pauseNarrate() {
+    _ttsActive = false;
+    if (_ttsAudio) { _ttsAudio.pause(); _ttsAudio = null; }
+    try { _tts.cancel(); } catch(e){}
+    document.querySelectorAll('.narrating').forEach(function(el){ el.classList.remove('narrating'); });
+    _updateNarrateBtn();
+    if (window._bgAudio && window._preNarrateVol !== undefined) {
+      _fadeMusicTo(window._preNarrateVol, 800);
+      window._preNarrateVol = undefined;
     }
   }
 
-  function toggleNarrate() {
-    if (_ttsActive) {
-      _stopNarrate();
-    } else {
-      _ttsActive = true;
-      _fishOk = true;
-      if (window._bgAudio) {
-        window._preNarrateVol = window._bgAudio.volume;
-        _fadeMusicTo(0.2, 800);
-      }
-      var startIdx = _narrateIdx >= 0 ? _narrateIdx : 0;
-      _updateNarrateBtn();
-      _speakParas(_getParagraphs(), startIdx);
-    }
+  function resumeNarrate() {
+    if (_ttsActive || _narrateIdx < 0) return;
+    _ttsActive = true;
+    _fishOk = true;
+    if (window._bgAudio) { window._preNarrateVol = window._bgAudio.volume; _fadeMusicTo(0.2, 800); }
+    _updateNarrateBtn();
+    _speakParas(_getParagraphs(), _narrateIdx);
   }
 
   function _stopNarrate() {
     _ttsActive = false;
+    _narrateIdx = -1;
     if (_ttsAudio) { _ttsAudio.pause(); _ttsAudio = null; }
     try { _tts.cancel(); } catch(e){}
     document.querySelectorAll('.narrating').forEach(function(el){ el.classList.remove('narrating'); });
