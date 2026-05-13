@@ -3,7 +3,8 @@
     '53287951-0b18-42d8-acfd-61d36d056945', // Javier_Bris
     '1825a09a-e5ca-4d76-8932-745b54127fc6',  // Admin
     '5e8f2eec-2b0b-4c9f-bfed-b94c231a938e',  // Admin2
-    '0dfc5a42-7252-48e3-8967-887b52083c84'  // Javi_bris2
+    '0dfc5a42-7252-48e3-8967-887b52083c84',  // Javi_bris2
+    '3146a05d-a591-4dee-a855-64a80e0c5047'  // Javi_bris3
   ];
   var STORAGE_KEY = 'argo_access';
 
