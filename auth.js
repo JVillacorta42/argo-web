@@ -4,7 +4,9 @@
     '1825a09a-e5ca-4d76-8932-745b54127fc6',  // Admin
     '5e8f2eec-2b0b-4c9f-bfed-b94c231a938e',  // Admin2
     '0dfc5a42-7252-48e3-8967-887b52083c84',  // Javi_bris2
-    '3146a05d-a591-4dee-a855-64a80e0c5047'  // Javi_bris3
+    '3146a05d-a591-4dee-a855-64a80e0c5047',  // Javi_bris3
+    'b2e94f71-3c1a-4d88-a062-7f8305e6c219',  // Lander
+    'a7d01c58-9e47-4b3f-8516-2c6f84b1d035'   // Jesus
   ];
   var STORAGE_KEY = 'argo_access';
 
