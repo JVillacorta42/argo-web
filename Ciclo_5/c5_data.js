@@ -179,6 +179,7 @@ var C5_DATA = {
       "1264",
       "1265",
       "1316",
+      "1337",
       "1399",
       "1400",
       "1441",
@@ -241,6 +242,7 @@ var C5_DATA = {
       "3608",
       "3609",
       "3671",
+      "3708",
       "3749",
       "3901",
       "3902",
@@ -267,6 +269,7 @@ var C5_DATA = {
       "4267",
       "4268",
       "4292",
+      "4330",
       "4437",
       "4478",
       "4535",
@@ -276,6 +279,8 @@ var C5_DATA = {
       "4803",
       "4932",
       "4999",
+      "5017",
+      "5048",
       "5127",
       "5129",
       "5236",
@@ -287,6 +292,7 @@ var C5_DATA = {
       "5425",
       "5426",
       "5427",
+      "5525",
       "5659",
       "5678",
       "5689",
@@ -355,6 +361,7 @@ var C5_DATA = {
       "7613",
       "7776",
       "7783",
+      "7915",
       "7965",
       "7982",
       "7983",
@@ -1146,8 +1153,10 @@ var C5_DATA = {
         "<p class=\"narrative\">Ur-Fleece, más grande que antes, ha sido visto frente a la costa de Andros.</p>",
         "<p class=\"narrative\">Ur-Fleece no puede ser asesinado por medios normales—¿no habéis aprendido nada durante vuestros viajes? Volverá a atormentaros en muy poco tiempo… Gana +2 <span class=\"ato-icon\">A</span> y 1 Eco de la Recolección (Echo of Recollection). A partir de ahora, cada Batalla de Dura Verdad (Harsh Truth Battle) que luchéis será contra un Ur-Fleece de Nivel 2 (¡esto incluye el final de White Lie!). Haz una marca junto a su Pista de Batalla (Battle Track) para anotarlo.</p>",
         "<p class=\"narrative\">Si llegáis a este párrafo de nuevo—por improbable que parezca—pasa al Nivel 3. Y así sucesivamente, ad infinitum.</p>",
-        "<p class=\"narrative\">Procede con las Consecuencias de Batalla (Aftermath) de manera normal.</p>",
-        "<p class=\"narrative\"><strong>133</strong> <strong>7</strong> Os sorprende ver una visión inquietantemente familiar tan lejos de las costas de Creta. Las formas característicamente angulares son inconfundibles. Estas formaciones submarinas, incluidos los pequeños volcanes, han sido moldeadas por el Laberinto (Maze).</p>",
+        "<p class=\"narrative\">Procede con las Consecuencias de Batalla (Aftermath) de manera normal.</p>"
+      ],
+      "1337": [
+        "<p class=\"narrative\">Os sorprende ver una visión inquietantemente familiar tan lejos de las costas de Creta. Las formas característicamente angulares son inconfundibles. Estas formaciones submarinas, incluidos los pequeños volcanes, han sido moldeadas por el Laberinto (Maze).</p>",
         "<p class=\"narrative\">Creta no está tan lejos, pero aun así da miedo pensar que la Verdad del Laberinto (Truth of the Labyrinth) llegó hasta aquí. Unas pocas semanas más, y habría empezado a laberintizar las islas cicládicas más al sudoeste. Entonces Temenos habría sido libre de marcharse…</p>",
         "<p class=\"game-note\">Resta -1 <span class=\"ato-symbol\">2</span> . Puedes intercambiar cualquier botín único de Ciclo V por la carta de Enigma No Resuelto <span class=\"ato-icon\">Z</span> (Unsolved Enigma) de Ciclo I (Mazo Secreto 2, carta 20). Regresa a la Fase de Viaje.</p>"
       ],
@@ -1698,13 +1707,15 @@ var C5_DATA = {
         "<p class=\"narrative\">El mapa incrustado ha demostrado ser útil, conduciéndonos al cercano depósito de oricalco, actividad de sirenas aparte, lo que sugiere con fuerza que los Antiguos conocían el mineral. ¿Por qué no lo extrajeron?</p>",
         "<p class=\"game-note\">Coloca 1 ficha <span class=\"ato-icon\">A</span> en Odisea Interior. Vuelve al párrafo anterior.</p>"
       ],
+      "3708": [
+        "<p class=\"narrative\">En el alba de la nueva era, sabiendo lo que ha ocurrido antes, Poseidón establece las leyes para Sus hijos. «Por encima de todo me adoraréis, con todos vuestros actos, y con todos vuestros pensamientos, y moriréis por mí si así lo dispongo. No preguntéis por qué, hacedlo.» «Segundo, no me ofenderéis a mí, ni a mis divinos hermanos, con vuestros actos o vuestros pensamientos. La principal de estas faltas es la curiosidad. No preguntéis por qué el mundo es como es, pues es como es porque Yo así lo he querido. Todo lo que comprendéis ha sido hecho así por mi mano y providencia. Todo lo que no comprendéis ha sido hecho así por mi mano y providencia. No os corresponde comprender, solo necesitáis seguir.»</p>",
+        "<p class=\"narrative\">«Obedeced estas dos leyes y vivid vuestras vidas felices, sabiendo que tienen un propósito.»</p>",
+        "<p class=\"game-note\">Coloca 1 <span class=\"ato-icon\">A</span> ficha en Odisea Interior. Vuelve a <a class=\"ref-link\" data-doc=\"c5rev\" data-sec=\"3123\">3123</a>.</p>"
+      ],
       "3749": [
         "<p class=\"narrative\"><strong> El fin de la odisea</strong> El Argo está acabado. Vuestra última y mejor esperanza, si no de victoria, porque eso se sentía inalcanzable desde hace mucho más tiempo, sí al menos de mera supervivencia, ha sido destruida. La Némesis viene a por vosotros.</p>",
         "<p class=\"narrative\">Habéis fallado al pueblo de Hellas. Habéis fallado al Viejo Sacerdote. Y os habéis fallado a vosotros mismos. ¿Qué queda?</p>",
-        "<p class=\"game-note\">Si no estás en la Historia 4B, ve a <a class=\"ref-link\" data-doc=\"c5rev\" data-sec=\"4214\">4214</a>. Si estás en la Historia 4B, ve a <a class=\"ref-link\" data-doc=\"c5rev\" data-sec=\"4999\">4999</a>.</p>",
-        "<p class=\"narrative\"><strong>37</strong> <strong>08</strong> En el alba de la nueva era, sabiendo lo que ha ocurrido antes, Poseidón establece las leyes para Sus hijos. «Por encima de todo me adoraréis, con todos vuestros actos, y con todos vuestros pensamientos, y moriréis por mí si así lo dispongo. No preguntéis por qué, hacedlo.» «Segundo, no me ofenderéis a mí, ni a mis divinos hermanos, con vuestros actos o vuestros pensamientos. La principal de estas faltas es la curiosidad. No preguntéis por qué el mundo es como es, pues es como es porque Yo así lo he querido. Todo lo que comprendéis ha sido hecho así por mi mano y providencia. Todo lo que no comprendéis ha sido hecho así por mi mano y providencia. No os corresponde comprender, solo necesitáis seguir.»</p>",
-        "<p class=\"narrative\">«Obedeced estas dos leyes y vivid vuestras vidas felices, sabiendo que tienen un propósito.»</p>",
-        "<p class=\"game-note\">Coloca 1 <span class=\"ato-icon\">A</span> ficha en Odisea Interior. Vuelve a <a class=\"ref-link\" data-doc=\"c5rev\" data-sec=\"3123\">3123</a>.</p>"
+        "<p class=\"game-note\">Si no estás en la Historia 4B, ve a <a class=\"ref-link\" data-doc=\"c5rev\" data-sec=\"4214\">4214</a>. Si estás en la Historia 4B, ve a <a class=\"ref-link\" data-doc=\"c5rev\" data-sec=\"4999\">4999</a>.</p>"
       ],
       "3901": [
         "<p class=\"narrative\"><strong> Huida de la Némesis</strong></p>",
@@ -1816,8 +1827,10 @@ var C5_DATA = {
       ],
       "4292": [
         "<div class=\"rules-img-wrap\"><img class=\"rules-img\" src=\"rules_img/image68.png\" alt=\"\"></div><p class=\"narrative\"><strong>UNKNOWN DELOS</strong> Si la casilla predestinada está marcada, vuelve inmediatamente al Mapa de Unknown Delos. Si no lo está, márcala y continúa: Cruzáis el umbral y os veis arrastrados por una ráfaga de aire caliente. Mientras tratáis de orientaros, sentís el calor en vuestros rostros, vuestros ojos lagrimean por el humo. Noche sin estrellas y el tranquilo mar negro La interminable escalera oculta y el interminable abismo a ser Páginas ardientes revolotean a vuestro alrededor, como polillas que volaron demasiado cerca de la llama abierta. La boca abierta de la eternidad se abre ante el Buscador Toda la biblioteca está ardiendo, sus muros desmoronándose, derritiéndose por un fuego invisible. La piedra se derrite... Una luz en la oscuridad os llama ABAJO La luz de la NÉMESIS del conocimiento y la MENTIRA Caminad a través de la AGUJA pero no os detengáis Mientras el amanecer trae consigo el punto cero ETERNIDAD 2515212391212495851851187151412120192515212391249 585185118715141212019251521239121249585</p>",
-        "<p class=\"game-note\">La explosión blanca lo envuelve todo. Lo siguiente que sabes es que estás tambaleándote fuera de un corredor oscuro: «¿¡Qué es este lugar?!», sisea uno de vosotros. Un Argonauta aleatorio obtiene 1 nodo de Mnemos. Luego, si no estás en la carta de Perdición 3B, obtén +2 <span class=\"ato-icon\">B</span> . Vuelve al Mapa de Unknown Delos.</p>",
-        "<p class=\"narrative\"><strong>433</strong> <strong>0</strong> Pasáis varias horas buscando cualquier señal de la capital atlante oculta, Anostos. Justo cuando estáis perdiendo la esperanza, veis un viejo símbolo fluorescente pintado en una roca cubierta de coral. Ha perdido la mayor parte de sus propiedades luminosas, pero está ahí. Está ahí. Atlántida. Anostos. Y os conduce a vuestro destino...</p>",
+        "<p class=\"game-note\">La explosión blanca lo envuelve todo. Lo siguiente que sabes es que estás tambaleándote fuera de un corredor oscuro: «¿¡Qué es este lugar?!», sisea uno de vosotros. Un Argonauta aleatorio obtiene 1 nodo de Mnemos. Luego, si no estás en la carta de Perdición 3B, obtén +2 <span class=\"ato-icon\">B</span> . Vuelve al Mapa de Unknown Delos.</p>"
+      ],
+      "4330": [
+        "<p class=\"narrative\">Pasáis varias horas buscando cualquier señal de la capital atlante oculta, Anostos. Justo cuando estáis perdiendo la esperanza, veis un viejo símbolo fluorescente pintado en una roca cubierta de coral. Ha perdido la mayor parte de sus propiedades luminosas, pero está ahí. Está ahí. Atlántida. Anostos. Y os conduce a vuestro destino...</p>",
         "<div class=\"rules-img-wrap\"><img class=\"rules-img\" src=\"rules_img/image69.png\" alt=\"\"></div>",
         "<p class=\"narrative\">Ver <a class=\"ref-link\" data-doc=\"c5rev\" data-sec=\"1249\">1249</a>.</p>"
       ],
@@ -1872,12 +1885,16 @@ var C5_DATA = {
         "<p class=\"narrative\">«¡Maldita sea esa máquina!», estalla Jason. «¡Mintió sobre el Virtuario! ¡Mintió sobre el maldito Poseidón! ¡Que se queden con esa cosa miserable, para lo que les va a servir!»</p>",
         "<p class=\"narrative\">Y ahí está. La pieza clave. «Eso es exactamente lo que haremos. Tomemos una página del libro de Odiseo», dice el Intermediario, su voz temblando de excitación contenida. «Y dejemos que se la queden».</p>",
         "<p class=\"narrative\">¿Un barco troyano? Es como si el Viejo Sacerdote aún estuviera entre vosotros, con una sonrisa astuta en su rostro arrugado. Lo aprobaría.</p>",
-        "<p class=\"game-note\">Descarta todas las fichas ai de la carta de Perdición. Después, descarta la carta de Perdición. Después, descarta la carta de Historia. Después, finalmente, abre el Sobre Z y, sin mirar su reverso, procede a la Historia 5A, Have It. A partir de ahora, no puedes perder la campaña por quedarte sin tiempo. Si te quedas sin casillas para marcar en la Línea Temporal, simplemente ignora el Paso de Línea Temporal. Vuelve a la Fase de Viaje.</p>",
-        "<p class=\"narrative\"><strong>501</strong> <strong>7</strong> Aquí no hay luz. No hay vida. ¿Qué locura nos ha traído a este lugar frío y oscuro, donde cada terror resuena por la eternidad? Hay templos aquí, y estatuas de dioses, pero esta no es una tierra sagrada, ni el refugio plateado de los Progenitores. Esto es el infierno.</p>",
+        "<p class=\"game-note\">Descarta todas las fichas ai de la carta de Perdición. Después, descarta la carta de Perdición. Después, descarta la carta de Historia. Después, finalmente, abre el Sobre Z y, sin mirar su reverso, procede a la Historia 5A, Have It. A partir de ahora, no puedes perder la campaña por quedarte sin tiempo. Si te quedas sin casillas para marcar en la Línea Temporal, simplemente ignora el Paso de Línea Temporal. Vuelve a la Fase de Viaje.</p>"
+      ],
+      "5017": [
+        "<p class=\"narrative\">Aquí no hay luz. No hay vida. ¿Qué locura nos ha traído a este lugar frío y oscuro, donde cada terror resuena por la eternidad? Hay templos aquí, y estatuas de dioses, pero esta no es una tierra sagrada, ni el refugio plateado de los Progenitores. Esto es el infierno.</p>",
         "<p class=\"narrative\">Los Discípulos de Pitágoras han enloquecido. Se han vuelto hacia la adoración de otra cosa que vive más allá del horizonte de las falsas estrellas. Nos están cazando, utilizando nuestra sangre en viles rituales para su «Simetría Extraña».</p>",
         "<p class=\"narrative\">Aquí haremos nuestra última resistencia, como dicta la tradición de Sum . Si estás leyendo esto, entonces hemos fracasado. En ese caso, que tú tengas mejor suerte y detengas el Enigma antes de que consuma toda Theras.</p>",
-        "<p class=\"game-note\">Obtén +1 <span class=\"ato-icon\">M</span> . Vuelve a <a class=\"ref-link\" data-doc=\"c5rev\" data-sec=\"4241\">4241</a>.</p>",
-        "<p class=\"narrative\"><strong>504</strong> <strong>8</strong> Sin embargo, la curiosidad no pudo ser erradicada, ni siquiera con castigo divino. A lo largo de los siglos, las leyes que sostenían la Santa Inocencia se relajaron, y las ciencias se filtraron por sus grietas, como malas hierbas —o los primeros brotes de la primavera. A medida que el pensamiento libre se volvía más aceptado, algunos comenzaron a cuestionar la sabiduría de la Santa Inocencia, aún con las más puras intenciones en su corazón, para servir al Padre.</p>",
+        "<p class=\"game-note\">Obtén +1 <span class=\"ato-icon\">M</span> . Vuelve a <a class=\"ref-link\" data-doc=\"c5rev\" data-sec=\"4241\">4241</a>.</p>"
+      ],
+      "5048": [
+        "<p class=\"narrative\">Sin embargo, la curiosidad no pudo ser erradicada, ni siquiera con castigo divino. A lo largo de los siglos, las leyes que sostenían la Santa Inocencia se relajaron, y las ciencias se filtraron por sus grietas, como malas hierbas —o los primeros brotes de la primavera. A medida que el pensamiento libre se volvía más aceptado, algunos comenzaron a cuestionar la sabiduría de la Santa Inocencia, aún con las más puras intenciones en su corazón, para servir al Padre.</p>",
         "<p class=\"narrative\">Porque ¿cómo podrían servir mejor al Padre, si su conocimiento del mundo era tan dolorosamente limitado? ¿No serían mejores servidores si supieran más? ¿Si pudieran hacer más?</p>",
         "<p class=\"narrative\">Así, algunos de estos pensadores libres, más tarde llamados Ektas-elenchou, buscaron conocer el mundo más allá de los arrecifes y del dominio de su Padre.</p>",
         "<p class=\"narrative\">Así fue como descubrieron que los mares eran Obtén 1 Piedra de Pigmalión. Vuelve al párrafo anterior (Hub 1, <a class=\"ref-link\" data-doc=\"c5rev\" data-sec=\"0047\">0047</a>).</p>"
@@ -1971,8 +1988,10 @@ var C5_DATA = {
         "<p class=\"game-note\">Obtén +1 <span class=\"ato-icon\">A</span> y +1 <span class=\"ato-symbol\">2</span> . Vuelve a la Fase de Viaje.</p>"
       ],
       "5427": [
-        "<p class=\"game-note\">Pasáis varias horas buscando cualquier señal de la capital atlante oculta, Anostos, pero no encontráis nada, habiendo perdido tiempo y malgastado recursos . Pierde 2 recursos del Ciclo V. Vuelve a la Fase de Viaje.</p>",
-        "<p class=\"narrative\"><strong>552</strong> <strong>5</strong> Pasáis varias horas buscando cualquier señal de la capital atlante oculta, Anostos. Justo cuando estáis perdiendo la esperanza, veis un viejo símbolo fluorescente pintado en una roca cubierta de coral. Ha perdido la mayor parte de sus propiedades luminosas, pero está ahí. Está ahí.</p>",
+        "<p class=\"game-note\">Pasáis varias horas buscando cualquier señal de la capital atlante oculta, Anostos, pero no encontráis nada, habiendo perdido tiempo y malgastado recursos . Pierde 2 recursos del Ciclo V. Vuelve a la Fase de Viaje.</p>"
+      ],
+      "5525": [
+        "<p class=\"narrative\">Pasáis varias horas buscando cualquier señal de la capital atlante oculta, Anostos. Justo cuando estáis perdiendo la esperanza, veis un viejo símbolo fluorescente pintado en una roca cubierta de coral. Ha perdido la mayor parte de sus propiedades luminosas, pero está ahí. Está ahí.</p>",
         "<div class=\"rules-img-wrap\"><img class=\"rules-img\" src=\"rules_img/image73.png\" alt=\"\"></div><p class=\"narrative\">Atlántida. Anostos. Y os conduce a vuestro destino... Ver <a class=\"ref-link\" data-doc=\"c5rev\" data-sec=\"1249\">1249</a>.</p>"
       ],
       "5659": [
@@ -2384,8 +2403,10 @@ var C5_DATA = {
         "<p class=\"narrative\"><strong>Mi Penélope</strong> Te amé. Eras hermosa y amable, pero, más importante que nada, sabia. Más sabia que yo. ¿Recuerdas nuestra última conversación? Entonces estabas llorando, y yo también quería llorar, pero no tenía tu fortaleza. Fue después de que muriera Telémaco— No. Fue peor que eso. Dije: «No puede convertirse en capitán. No es apto. No está bien». Y tú me miraste suplicante. Y yo dije: «¡Por culpa de este muchacho, he perdido a mi hijo!». Y tú, a quien acababan de arrebatarle su hijo igual que a mí, tú, que lo diste a luz y lo criaste, dijiste: «No pierdas a otro». Los dos hombres están de pie en los bajíos de Cefalonia. La lluvia empapa sus gastadas túnicas. Las olas rompen contra las rocas. «Devuélveme mi nave, Odiseo», dice Jasón. «Me la he ganado». «¿Cuántos años han pasado, Jasón?», pregunta el Viejo Sacerdote. «Justo estaba pensando en ti, Penélope . . . Telémaco. Nunca hemos hablado de ello». «¿Cómo?! ¡Me dejaste a merced de Poseidón, y él no tiene ninguna! ¡Ninguna, padre!», grita Jasón. «Yo—, lo siento. Acababa de enterarme entonces del destino de Telémaco y. . . Jasón, sé que fuiste tú. Y sé que fue un accidente». «Sigues siendo muy bueno con las palabras, después de todo este tiempo», se burla Jasón. «Si fuera así, entonces usaste conscientemente mi culpa contra mí para arrebatarme el control de la nave, de tu “Argo”, de mis manos». Sacude la cabeza. «Nunca me consideraste para ello, ¿verdad? ¡¡¡Y yo era el mejor candidato!!! ¡No Telémaco! Pero convenciste al resto de Trismegistus para que le dieran la nave a él . . . porque lo querías más. Te entregué todo de mí, hice todo lo que me pediste, y aun así lo querías más a él . . .» El Viejo Sacerdote permanece en silencio, con la lluvia corriendo por su rostro arrugado. Luego, dice: «Tienes razón. En ambas cosas. Lo siento. Estaba desesperado y cometí un error. Pero aún hay tiempo para nosotros. Hijo mío . . .» Extiende la mano. «Ven, quédate conmigo aquí, en Cefalonia. La nave necesita permanecer oculta, pero también necesita un custodio». Jasón hace una pausa durante un instante imperceptible, luego sonríe y niega con la cabeza. «No. He terminado contigo, Odiseo. Si no quieres darme la nave, la tomaré». El hombre más joven se marcha. El Viejo Sacerdote permanece. Mira la inmensa nave-ciudad, la mira de verdad, por primera vez desde que la dejó varada allí, hace casi diez años. Ya no puede quedarse en Cefalonia. El Argo necesita navegar otra vez. Y si ese es el caso, bien podría navegar hacia Thera.</p>"
       ],
       "7783": [
-        "<p class=\"game-note\">Pasáis varias horas buscando cualquier señal de la oculta capital atlante, Anostos, pero no encontráis nada, habiendo perdido tiempo y malgastado recursos . Pierde 2 recursos cualesquiera del Ciclo V. Vuelve a la Fase de Viaje.</p>",
-        "<p class=\"narrative\"><strong>791</strong> <strong>5</strong> Y después de establecer sus leyes divinas, les concedió el padre un tercer don, la abundancia eterna. Mientras se adhirieran a su palabra sagrada, nada les faltaría, pues los mares proveerían. Eternamente agradecidos a su dios y padre, Poseidón Todopoderoso, por los dones de la vida y el pensamiento, y la abundancia eterna, los Nereidanos se postraron en súplica, entregados por completo a la Santa Inocencia. Y en la Santa Inocencia vivieron sus breves vidas, generación tras generación, aferrados a sus arrecifes y a su fe, y a cualquiera que mostrara el menor indicio de la mancha de la curiosidad híbrica, lo arrancaban sin misericordia ni contención. Obtén 1 recurso Raro de Plata No Muerta. Vuelve al párrafo anterior (Hub 2,<a class=\"ref-link\" data-doc=\"c5rev\" data-sec=\"0011\">0011</a>).</p>"
+        "<p class=\"game-note\">Pasáis varias horas buscando cualquier señal de la oculta capital atlante, Anostos, pero no encontráis nada, habiendo perdido tiempo y malgastado recursos . Pierde 2 recursos cualesquiera del Ciclo V. Vuelve a la Fase de Viaje.</p>"
+      ],
+      "7915": [
+        "<p class=\"narrative\">Y después de establecer sus leyes divinas, les concedió el padre un tercer don, la abundancia eterna. Mientras se adhirieran a su palabra sagrada, nada les faltaría, pues los mares proveerían. Eternamente agradecidos a su dios y padre, Poseidón Todopoderoso, por los dones de la vida y el pensamiento, y la abundancia eterna, los Nereidanos se postraron en súplica, entregados por completo a la Santa Inocencia. Y en la Santa Inocencia vivieron sus breves vidas, generación tras generación, aferrados a sus arrecifes y a su fe, y a cualquiera que mostrara el menor indicio de la mancha de la curiosidad híbrica, lo arrancaban sin misericordia ni contención. Obtén 1 recurso Raro de Plata No Muerta. Vuelve al párrafo anterior (Hub 2,<a class=\"ref-link\" data-doc=\"c5rev\" data-sec=\"0011\">0011</a>).</p>"
       ],
       "7965": [
         "<p class=\"narrative\">Soy el último. Todos los demás han pasado por la transformación y han regresado al mar, a cantar sus nuevas canciones de costas exteriores y patrones espirales. Soy el último. Vinimos aquí buscando refugio y hemos descubierto que no hay refugio. Hemos rezado bajo la imagen de nuestro Señor y Padre, Poseidón, y hemos aprendido que no le importa el destino de su pueblo elegido. ¿Fuimos alguna vez elegidos? ¿O simplemente estábamos ahí? Ya no importa. Oigo la canción de los círculos, veo la canción girando. Mientras reverbera a mi alrededor, yo también me convierto en círculo, espiralándome hacia el Más Allá Oscuro.</p>",
