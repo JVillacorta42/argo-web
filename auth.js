@@ -6,7 +6,9 @@
     '0dfc5a42-7252-48e3-8967-887b52083c84',  // Javi_bris2
     '3146a05d-a591-4dee-a855-64a80e0c5047',  // Javi_bris3
     'b2e94f71-3c1a-4d88-a062-7f8305e6c219',  // Lander
-    'a7d01c58-9e47-4b3f-8516-2c6f84b1d035'   // Jesus
+    'a7d01c58-9e47-4b3f-8516-2c6f84b1d035',  // Jesus
+    '287cbba5-6291-4c12-aa0f-702134eab057',  // Jordi
+    '42054794-5baf-401b-a51a-700fc1b22da2'   // Javier
   ];
   var STORAGE_KEY = 'argo_access';
 
